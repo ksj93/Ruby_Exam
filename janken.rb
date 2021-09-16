@@ -1,12 +1,20 @@
-
 class Player
+  def alphabet?(s)
+  (s =~ /^[A-Za-z]+$/) == 0
+  end
   def hand
     puts "数字を入力してください。"
     puts "0:グー, 1:チョキ, 2:パー"
-    input_hand = gets.to_i
-    puts input_hand
-    while true
-      if input_hand == 0 || input_hand ==1 || input_hand ==2
+    input_hand = gets
+    if alphabet?(input_hand) ==true
+      puts "0〜2の数字を入力してください。"
+      return hand
+    else
+      input_hand = input_hand.to_i
+    end
+    text_confirm=true
+    while text_confirm
+      if input_hand >=0 && input_hand <=2
         player_hand = input_hand
         return player_hand
       else
@@ -16,6 +24,8 @@ class Player
     end
   end
 end
+
+
 class Enemy
   def hand
     enemy_hand=rand(2)
@@ -39,6 +49,8 @@ class Janken
     end
   end
 end
+
+
 class GameStart
   def self.jankenpon
     player = Player.new
@@ -50,4 +62,7 @@ class GameStart
     end
   end
 end
+
+
+
 GameStart.jankenpon
